@@ -1,0 +1,25 @@
+{{define "layout"}}
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{{.Title}}</title>
+		<link rel="stylesheet" href="/static/bundle.css" />
+	</head>
+	<body>
+		<header>
+			<div>
+				<h1>Мотиватор</h1>
+				<a href="/create">Создать</a>
+			</div>
+		</header>
+
+		<main>{{template "content" .}}</main>
+
+		<footer>
+			<p>Мотиватор 2026. Все права защищены &copy;.</p>
+		</footer>
+	</body>
+</html>
+{{end}}

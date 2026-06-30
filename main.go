@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"go-fullstack/internal/config"
+	"go-fullstack/internal/handlers/create"
 	"go-fullstack/internal/handlers/root"
 	"go-fullstack/internal/storage"
-	"log"
+	"log/slog"
 	"net/http"
 	"os"
 	"time"
@@ -17,20 +18,23 @@ func main() {
 
 	cfg := config.MustLoad()
 
+	log := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}))
+
 	storage, err := storage.New(ctx, cfg.ConnectionString)
 	if err != nil {
-		log.Fatalf("Failed to init storage: %v", err)
+		log.Error("Failed to init database", "error", err)
 		os.Exit(1)
 	}
 	defer storage.Close()
 
-	log.Println("Сервер запущен на - http://localhost:8080")
+	log.Info("Сервер запущен на - http://localhost:8080")
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", root.New())
+	http.HandleFunc("/create", create.New())
 
 	err = http.ListenAndServe(":8080", nil)
 	if err != nil {
-		log.Fatalf("Server failed: %v", err)
+		log.Error("Server start failed", "error", err)
 	}
 }

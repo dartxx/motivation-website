@@ -1,0 +1,38 @@
+{{define "content"}} {{if .Submitted}}
+<div class="create__submitted-container">
+	<h1>Успешно!</h1>
+	<span>Ваша мотивационная запись создана.</span>
+</div>
+{{else}}
+<div class="create__container">
+	<form class="create__form" action="/create" method="post">
+		<label for="title">Заголовок:</label>
+		<input
+			type="text"
+			name="title"
+			id="title"
+			placeholder="Как не терять мотивацию"
+			required
+		/>
+
+		<label for="content">Содержимое:</label>
+		<textarea
+			name="content"
+			id="content"
+			placeholder="Интересная статья ..."
+			required
+		></textarea>
+
+		<label for="author">Автор:</label>
+		<input
+			type="text"
+			name="author"
+			id="author"
+			placeholder="Алексей"
+			required
+		/>
+
+		<button type="submit">Сохранить</button>
+	</form>
+</div>
+{{end}} {{end}}

@@ -3,25 +3,17 @@ package storage
 import (
 	"context"
 	"fmt"
-	"time"
+	"go-fullstack/internal/models/card"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
-
-type Card struct {
-	ID        int
-	Title     string
-	Content   string
-	Author    string
-	CreatedAt time.Time
-}
 
 type Storage struct {
 	pool *pgxpool.Pool
 }
 
 func New(ctx context.Context, connStr string) (*Storage, error) {
-	const op = "internal.storage.New"
+	const op = "storage.New"
 
 	pool, err := pgxpool.New(ctx, connStr)
 	if err != nil {
@@ -55,8 +47,8 @@ func (s *Storage) Close() {
 	s.pool.Close()
 }
 
-func (storage *Storage) CreateCard(ctx context.Context, card *Card) error {
-	const op = "internal.storage.CreateCard"
+func (storage *Storage) CreateCard(ctx context.Context, card *card.Card) error {
+	const op = "storage.CreateCard"
 
 	row := storage.pool.QueryRow(ctx,
 		"INSERT INTO cards (title, content, author) VALUES ($1, $2, $3) RETURNING id, created_at", card.Title, card.Content, card.Author)
@@ -69,8 +61,8 @@ func (storage *Storage) CreateCard(ctx context.Context, card *Card) error {
 	return nil
 }
 
-func (storage *Storage) GetAllCards(ctx context.Context) ([]Card, error) {
-	const op = "internal.storage.GetAllCards"
+func (storage *Storage) GetAllCards(ctx context.Context) ([]card.Card, error) {
+	const op = "storage.GetAllCards"
 
 	rows, err := storage.pool.Query(ctx, "SELECT id, title, content, author, created_at FROM cards ORDER BY created_at DESC")
 	if err != nil {
@@ -78,9 +70,9 @@ func (storage *Storage) GetAllCards(ctx context.Context) ([]Card, error) {
 	}
 	defer rows.Close()
 
-	var cards []Card
+	var cards []card.Card
 	for rows.Next() {
-		var c Card
+		var c card.Card
 		if err := rows.Scan(&c.ID, &c.Title, &c.Content, &c.Author, &c.CreatedAt); err != nil {
 			return nil, fmt.Errorf("%s: failed get all fields: %w", op, err)
 		}

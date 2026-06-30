@@ -1,9 +1,4 @@
-{{define "content"}} {{if .Submitted}}
-<div class="create__submitted-container">
-	<h1>Успешно!</h1>
-	<span>Ваша мотивационная запись создана.</span>
-</div>
-{{else}}
+{{define "content"}}
 <div class="create__container">
 	<form class="create__form" action="/create" method="post">
 		<label for="title">Заголовок:</label>
@@ -35,4 +30,4 @@
 		<button type="submit">Сохранить</button>
 	</form>
 </div>
-{{end}} {{end}}
+{{end}}

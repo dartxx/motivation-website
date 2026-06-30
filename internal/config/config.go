@@ -3,12 +3,20 @@ package config
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
 type Config struct {
 	ConnectionString string `yaml:"connection_string" env-required:"true"`
+	HTTPServer       `yaml:"http_server"`
+}
+
+type HTTPServer struct {
+	Address     string        `yaml:"address" env-required:"true"`
+	Timeout     time.Duration `yaml:"timeout" env-default:"4s"`
+	IdleTimeout time.Duration `yaml:"idle_timeout" env-default:"60s"`
 }
 
 func MustLoad() *Config {

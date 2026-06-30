@@ -1,0 +1,11 @@
+{{define "content"}} {{if .Submitted}}
+<div class="success__container">
+	<h1>Успешно!</h1>
+	<span>Ваша мотивационная запись создана.</span>
+</div>
+{{else}}
+<div class="success__container">
+	<h1>Ошибка!</h1>
+	<span>Произошла серверная ошибка. Поробуйте снова.</span>
+</div>
+{{end}}{{end}}

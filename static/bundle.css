@@ -96,9 +96,21 @@ footer {
 	overflow: hidden;
 }
 
-.root__author {
+.root__card-content-bottom {
+	display: flex;
 	color: #ccc;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.root__author {
 	text-align: right;
+}
+
+.root__no-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 /* Create */

@@ -49,7 +49,7 @@ func main() {
 
 	r.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
-	r.Get("/", root.New(renderer))
+	r.Get("/", root.New(renderer, storage))
 
 	r.Route("/create", func(r chi.Router) {
 		r.Get("/", create.New(renderer))

@@ -1,81 +1,23 @@
-{{define "content"}}
+{{define "content"}} {{if .Cards}}
 <div class="root__container">
+	{{range .Cards}}
 	<div class="root__card">
 		<div class="root__img"></div>
 
 		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
+			<h2 class="root__title">{{.Title}}</h2>
+			<p class="root__text">{{.Content}}</p>
+			<div class="root__card-content-bottom">
+				<span class="root__author">{{.Author}}</span>
+				<span class="root__created-at">{{.CreatedAtStr}}</span>
+			</div>
 		</div>
 	</div>
-
-	<div class="root__card">
-		<div class="root__img"></div>
-
-		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
-		</div>
-	</div>
-
-	<div class="root__card">
-		<div class="root__img"></div>
-
-		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
-		</div>
-	</div>
-
-	<div class="root__card">
-		<div class="root__img"></div>
-
-		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
-		</div>
-	</div>
-
-	<div class="root__card">
-		<div class="root__img"></div>
-
-		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
-		</div>
-	</div>
-
-	<div class="root__card">
-		<div class="root__img"></div>
-
-		<div class="root__card-content">
-			<h2 class="root__title">Далеко-далеко, за словесными.</h2>
-			<p class="root__text">
-				Далеко-далеко за словесными горами в стране гласных и согласных живут
-				рыбные тексты.
-			</p>
-			<span class="root__author">Иван</span>
-		</div>
-	</div>
+	{{end}}
 </div>
-{{end}}
+{{else}}
+<div class="root__no-cards">
+	<h1>Ошибка получения!</h1>
+	<span>Попробуйте обновить сайт или зайти позже.</span>
+</div>
+{{end}}{{end}}
